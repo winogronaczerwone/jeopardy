@@ -1,5 +1,11 @@
 .video-wrapper(ng-if='!game.round')
-  iframe(width="560", height="315", src="https://www.youtube.com/embed/53pg6AlOALs?autoplay=1&loop=1&playlist=53pg6AlOALs", frameborder="0", allowfullscreen)
+  iframe#tv-intro-video(width="560", height="315", src="https://www.youtube.com/embed/53pg6AlOALs?autoplay=1&loop=1&playlist=53pg6AlOALs&enablejsapi=1&playsinline=1", frameborder="0", allow="autoplay; encrypted-media", allowfullscreen)
+
+.fullscreen-prompt(ng-if='fullscreenPromptVisible')
+  .fullscreen-prompt-box
+    h2 Fullscreen required
+    p Click the button below to display the TV view in fullscreen.
+    button.btn.btn-primary.btn-lg(type='button', ng-click='enterFullscreen()') Enter fullscreen
 
 each k in ['J', 'DJ']
   .container-fluid.jeopardy-board(ng-show='game.round == "#{k}"')

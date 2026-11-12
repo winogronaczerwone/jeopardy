@@ -61,6 +61,31 @@ module.exports = function (io) {
       socket.emit('game:init', datas[data]);
     });
 
+    socket.on('game:reset', function (gameId) {
+      console.log('game:reset ' + gameId);
+      if (!datas[gameId]) {
+        return;
+      }
+      datas[gameId].game = {
+        control_player: 'player_1'
+      };
+      io.emit('round:start', datas[gameId]);
+    });
+
+    socket.on('music:command', function (command) {
+      if (command === 'mute' || command === 'unMute' || command === 'playVideo') {
+        socket.broadcast.emit('music:command', command);
+      }
+    });
+
+    socket.on('fullscreen:prompt', function () {
+      socket.broadcast.emit('fullscreen:prompt');
+    });
+
+    socket.on('fullscreen:state', function (isFullscreen) {
+      socket.broadcast.emit('fullscreen:state', Boolean(isFullscreen));
+    });
+
     socket.on('clue:start', function (data) {
       console.log('clue:start ' + data);
       socket.broadcast.emit('clue:start', data);

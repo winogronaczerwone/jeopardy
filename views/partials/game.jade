@@ -17,8 +17,12 @@ nav.navbar.navbar-default.navbar-fixed-top
       ul.nav.navbar-nav.navbar-right
         li
           button.btn.btn-primary.navbar-btn(type='button', ng-click='startGame()', ng-show='!game.round') Start Game
+          button.btn.btn-default.navbar-btn(type='button', ng-click='toggleMusic()', ng-show='!game.round')
+            span(ng-if='!musicMuted') Mute music
+            span(ng-if='musicMuted') Unmute music
+          button.btn.btn-default.navbar-btn(type='button', ng-click='requestTvFullscreen()', ng-show='!tvFullscreen') Fullscreen TV
           button.btn.btn-primary.navbar-btn(type='button', ng-click='endRound()', ng-show='game.round == "J" || game.round == "DJ" || game.round == "FJ"') End Round
-          button.btn.btn-danger.navbar-btn(type='button', ng-click='resetGame()', ng-show='game.round == "end"') Reset Game
+          button.btn.btn-danger.navbar-btn(type='button', ng-click='resetGame()', ng-show='game.round == "end"') End Game
 
 .container
   br

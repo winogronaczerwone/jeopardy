@@ -4,6 +4,9 @@ angular.module('myApp.controllers').
   controller('GameCtrl', function ($scope, $modal, response, socket) {
     $scope.data = response.data;
     $scope.hideComments = {};
+    $scope.game = {
+      control_player: 'player_1'
+    };
 
     socket.emit('game:init', $scope.data.id);
 
@@ -94,9 +97,27 @@ angular.module('myApp.controllers').
     }
 
     $scope.resetGame = function () {
-      $scope.game = {
-        control_player: 'player_1'
-      };
+      socket.emit('game:reset', $scope.data.id);
     };
-    $scope.resetGame();
+
+    $scope.musicMuted = false;
+    $scope.tvFullscreen = false;
+
+    socket.on('fullscreen:state', function (isFullscreen) {
+      $scope.tvFullscreen = isFullscreen;
+    });
+
+    $scope.toggleMusic = function () {
+      $scope.musicMuted = !$scope.musicMuted;
+      var command = $scope.musicMuted ? 'mute' : 'unMute';
+      socket.emit('music:command', command);
+      if (!$scope.musicMuted) {
+        socket.emit('music:command', 'playVideo');
+      }
+    };
+
+    $scope.requestTvFullscreen = function () {
+      socket.emit('fullscreen:prompt');
+    };
+
   });
