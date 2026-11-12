@@ -13,7 +13,7 @@ nav.navbar.navbar-default.navbar-fixed-top
               .input-group-addon(ng-show='game.control_player == "player_#{i}"')
                 span.glyphicon.glyphicon-map-marker
               input.form-control(type='text', placeholder='Player #{i}', ng-model='game.player_#{i}.name')
-              .input-group-addon {{game.player_#{i}.score || 0 | currency:'$':0}}
+              .input-group-addon {{game.player_#{i}.score || 0}}
       ul.nav.navbar-nav.navbar-right
         li
           button.btn.btn-primary.navbar-btn(type='button', ng-click='startGame()', ng-show='!game.round') Start Game
@@ -67,12 +67,12 @@ nav.navbar.navbar-default.navbar-fixed-top
             .col-md-2
               .panel.panel-primary(ng-click='startClue("clue_#{k}_#{i}_#{j}")', ng-show='data.clue_#{k}_#{i}_#{j} && !game.clue_#{k}_#{i}_#{j}', style='cursor:pointer;')
                 .panel-body.text-center(style='padding:5px;')
-                  .label.label-primary.pull-left {{ '#{j * (k == 'J' ? 200 : 400)}' | currency:'$':0 }}
+                  .label.label-primary.pull-left #{j * (k == 'J' ? 200 : 400)}
                   .label.label-warning.pull-left(ng-show='data.clue_#{k}_#{i}_#{j}.daily_double') DD
                   | {{data.clue_#{k}_#{i}_#{j}.clue_text}}
               .panel.panel-default(ng-show='data.clue_#{k}_#{i}_#{j} && game.clue_#{k}_#{i}_#{j}')
                 .panel-body.text-center(style='padding:5px;')
-                  .label.label-default.pull-left {{ '#{j * (k == 'J' ? 200 : 400)}' | currency:'$':0 }}
+                  .label.label-default.pull-left #{j * (k == 'J' ? 200 : 400)}
                   em.text-muted {{data.clue_#{k}_#{i}_#{j}.correct_response}}
 
   div(ng-show='game.round == "FJ"')
@@ -86,7 +86,6 @@ nav.navbar.navbar-default.navbar-fixed-top
             .col-md-4.text-center
               h4 {{ game.player_#{i}.name || 'Player #{i}' }}
               .input-group
-                .input-group-addon $
                 input.form-control(type='number', ng-model='game.player_#{i}.fj_wager')
         br
         .row

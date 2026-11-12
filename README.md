@@ -57,6 +57,17 @@ If you see a red "TS" next to a clue, that means it was a Triple Stumper on the 
 
 When all the clues are gone, hit the "End Round" button. Between the Jeopardy! and Double Jeopardy! rounds, the contestants' scores will be displayed on the board, and control will be given to the player with the lowest score.
 
+### Custom games
+
+Custom games are JSON files in `custom-games/`. A working example is included at
+`custom-games/example-game.json`. Start the server, open the host interface, and
+select **Custom games** from the seasons page.
+
+The JSON format contains `title`, optional `description`, and `rounds.J`,
+`rounds.DJ`, and `rounds.FJ`. Each regular-round category contains a `name` and
+an array of clues with `question` and `answer`. Final Jeopardy contains
+`category`, `question`, and `answer`.
+
 When you reach Final Jeopardy!, you must enter the contestants' wagers before the question is displayed. If you really want to get serious, there will be a link to J! Archive's wagering suggestions page, automatically populated with your contestants' names and scores. If you're actually practicing for Jeopardy!, you'd better be learning how to wager properly. Confirm the wagers, read the question (the Think! music will automatically start playing), let your contestants write down their answers, then enter the results. Hit the "End Round" button one last time to display your contestants' final scores on the big screen, and you're all done! (This is dumb that I didn't just make it happen automatically, but oh well.)
 
 Let's just reiterate that, be sure to hit "End Round" at the end of Final Jeopardy! This will display the final scores, as well as save a log of the game's results to a file on your computer in the `games` folder. You are also given some convenient links to the J! Archive so you can see how the real game played out. You can then use the "Reset Game" button if you'd like to play again, or use your browser's Back button to go back and pick another game.

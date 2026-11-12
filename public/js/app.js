@@ -49,6 +49,26 @@ config(function ($stateProvider, $urlRouterProvider) {
         }
       }
     }).
+    state('custom-games', {
+      url: '/custom-games',
+      templateUrl: 'partials/custom-games',
+      controller: 'CustomGamesCtrl',
+      resolve: {
+        response: function ($http) {
+          return $http.get('/api/custom-games');
+        }
+      }
+    }).
+    state('custom-game', {
+      url: '/custom-games/:id',
+      templateUrl: 'partials/game',
+      controller: 'GameCtrl',
+      resolve: {
+        response: function ($http, $stateParams) {
+          return $http.get('/api/custom-games/' + $stateParams.id);
+        }
+      }
+    }).
     state('board', {
       url: '/board',
       templateUrl: 'partials/board',

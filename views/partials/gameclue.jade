@@ -1,6 +1,6 @@
 .modal-header
   h3.modal-title {{ category.category_name }}
-    span.pull-right {{ result.value | currency:'$':0 }}
+    span.pull-right {{ result.value }}
       .label.label-warning.pull-right(ng-show='clue.daily_double') DD
       .label.label-danger.pull-right(ng-show='clue.triple_stumper') TS
 .modal-body
@@ -29,7 +29,6 @@
           label.btn.btn-primary(ng-model='result.dd_player', btn-radio="'player_#{i}'", ng-disabled='result.dd_confirm') {{ game.player_#{i}.name || 'Player #{i}' }}
     .col-md-4
       .input-group
-        span.input-group-addon $
         input.form-control(type='number', ng-model='result.dd_value', ng-disabled='result.dd_confirm')
     .col-md-4
       .button.btn.btn-primary(type='button', ng-click='setDDValue()', ng-hide='result.dd_confirm') Confirm

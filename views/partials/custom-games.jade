@@ -1,0 +1,11 @@
+.container
+  h1 Custom games
+  p Upload a JSON file to the <code>custom-games</code> directory and restart the server.
+  table.table.table-striped.table-hover.table-bordered
+    tr
+      th Name
+      th Description
+    tr(ng-repeat='game in data')
+      td
+        a(ui-sref='custom-game({ id: game.id.substring(7) })') {{ game.name }}
+      td {{ game.description }}

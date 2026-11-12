@@ -5,6 +5,94 @@
 var request = require('request');
 var cheerio = require('cheerio');
 var _ = require('lodash');
+var fs = require('fs');
+var path = require('path');
+
+var customGamesDirectory = path.join(__dirname, '..', 'custom-games');
+
+function customGameFiles() {
+  if (!fs.existsSync(customGamesDirectory)) {
+    return [];
+  }
+  return fs.readdirSync(customGamesDirectory)
+    .filter(function (name) { return path.extname(name) === '.json'; });
+}
+
+function customGameId(filename) {
+  return path.basename(filename, '.json');
+}
+
+function loadCustomGame(id) {
+  if (!/^[a-zA-Z0-9_-]+$/.test(id)) {
+    return null;
+  }
+  var filename = path.join(customGamesDirectory, id + '.json');
+  if (!fs.existsSync(filename)) {
+    return null;
+  }
+  var game = JSON.parse(fs.readFileSync(filename, 'utf8'));
+  var result = {
+    id: 'custom-' + id,
+    game_title: game.title || id,
+    game_comments: game.description || '',
+    game_complete: true
+  };
+
+  ['J', 'DJ'].forEach(function (round) {
+    var categories = (game.rounds && game.rounds[round]) || [];
+    categories.forEach(function (category, categoryIndex) {
+      var categoryKey = 'category_' + round + '_' + (categoryIndex + 1);
+      result[categoryKey] = {
+        category_name: category.name || ('Category ' + (categoryIndex + 1)),
+        category_comments: category.comments || '',
+        clue_count: (category.clues || []).length
+      };
+      (category.clues || []).forEach(function (clue, clueIndex) {
+        result['clue_' + round + '_' + (categoryIndex + 1) + '_' + (clueIndex + 1)] = {
+          clue_text: clue.question,
+          clue_html: clue.question,
+          correct_response: clue.answer,
+          daily_double: Boolean(clue.daily_double),
+          triple_stumper: Boolean(clue.triple_stumper)
+        };
+      });
+    });
+  });
+
+  var final = game.rounds && game.rounds.FJ;
+  if (final) {
+    result.category_FJ_1 = {
+      category_name: final.category || 'Final Jeopardy!',
+      category_comments: final.comments || ''
+    };
+    result.clue_FJ = {
+      clue_text: final.question,
+      clue_html: final.question,
+      correct_response: final.answer
+    };
+  }
+  return result;
+}
+
+exports.customGames = function (req, res) {
+  var games = customGameFiles().map(function (filename) {
+    var game = loadCustomGame(customGameId(filename));
+    return {
+      id: game.id,
+      name: game.game_title,
+      description: game.game_comments
+    };
+  });
+  res.json(games);
+};
+
+exports.customGame = function (req, res) {
+  var game = loadCustomGame(req.params.id);
+  if (!game) {
+    return res.status(404).json({ error: 'Custom game not found' });
+  }
+  res.json(game);
+};
 
 function exportIndex (req, res, next) {
   return function (error, response, html) {

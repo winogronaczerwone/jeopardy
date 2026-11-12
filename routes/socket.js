@@ -20,14 +20,21 @@ module.exports = function (io) {
       console.log('round:end ' + data.round);
       if (data.round === 'J') {
         data.round = 'DJ';
-        if (data.player_1.score < data.player_2.score && data.player_1.score < data.player_3.score) {
-          data.control_player = 'player_1';
-        }
-        else if (data.player_2.score < data.player_1.score && data.player_2.score < data.player_3.score) {
-          data.control_player = 'player_2';
-        }
-        else if (data.player_3.score < data.player_1.score && data.player_3.score < data.player_2.score) {
-          data.control_player = 'player_3';
+        var players = [1, 2, 3]
+          .map(function (number) {
+            var key = 'player_' + number;
+            var player = data[key];
+            return player
+              ? { key: key, score: Number(player.score) || 0 }
+              : undefined;
+          })
+          .filter(Boolean);
+
+        if (players.length) {
+          players.sort(function (a, b) {
+            return a.score - b.score;
+          });
+          data.control_player = players[0].key;
         }
       }
       else if (data.round === 'DJ') {

@@ -1,0 +1,63 @@
+{
+  "title": "Przykładowa gra",
+  "description": "Mała gra demonstracyjna do sprawdzenia importu własnych pytań.",
+  "rounds": {
+    "J": [
+      {
+        "name": "Technologia",
+        "clues": [
+          { "question": "Jak nazywa się język używany w tej aplikacji po stronie przeglądarki?", "answer": "JavaScript" },
+          { "question": "Co oznacza skrót URL?", "answer": "Uniform Resource Locator" },
+          { "question": "Jaki protokół służy do bezpiecznego połączenia z serwerem WWW?", "answer": "HTTPS" }
+        ]
+      },
+      {
+        "name": "Geografia",
+        "clues": [
+          { "question": "Jaka jest stolica Polski?", "answer": "Warszawa" },
+          { "question": "Najdłuższa rzeka Polski to jaka rzeka?", "answer": "Wisła" },
+          { "question": "Na jakim kontynencie leży Polska?", "answer": "Europa" }
+        ]
+      },
+      {
+        "name": "Nauka",
+        "clues": [
+          { "question": "Ile planet ma Układ Słoneczny?", "answer": "8" },
+          { "question": "Jaki gaz jest potrzebny ludziom do oddychania?", "answer": "Tlen" },
+          { "question": "Jaka siła przyciąga przedmioty do Ziemi?", "answer": "Grawitacja" }
+        ]
+      }
+    ],
+    "DJ": [
+      {
+        "name": "Historia",
+        "clues": [
+          { "question": "W którym roku Polska odzyskała niepodległość?", "answer": "1918" },
+          { "question": "Jak nazywał się pierwszy człowiek na Księżycu?", "answer": "Neil Armstrong" },
+          { "question": "W jakim mieście podpisano Konstytucję 3 maja?", "answer": "Warszawa" }
+        ]
+      },
+      {
+        "name": "Kultura",
+        "clues": [
+          { "question": "Kto napisał Pana Tadeusza?", "answer": "Adam Mickiewicz" },
+          { "question": "Jak nazywa się osoba kierująca orkiestrą?", "answer": "Dyrygent" },
+          { "question": "Ile strun ma standardowa gitara?", "answer": "6" }
+        ]
+      },
+      {
+        "name": "Sport",
+        "clues": [
+          { "question": "Ilu zawodników liczy drużyna piłkarska na boisku?", "answer": "11" },
+          { "question": "W jakim sporcie zdobywa się punkty za wsady?", "answer": "Koszykówka" },
+          { "question": "Jak nazywa się najważniejszy turniej tenisowy rozgrywany w Londynie?", "answer": "Wimbledon" }
+        ]
+      }
+    ],
+    "FJ": {
+      "category": "Polska",
+      "question": "Jak nazywa się najwyższy szczyt Polski?",
+      "answer": "Rysy"
+    }
+  }
+}

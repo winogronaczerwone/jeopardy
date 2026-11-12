@@ -55,6 +55,8 @@ app.get('/partials/:name', routes.partials);
 app.get('/api/seasons', api.seasons);
 app.get('/api/seasons/:id', api.season);
 app.get('/api/games/:id', api.game);
+app.get('/api/custom-games', api.customGames);
+app.get('/api/custom-games/:id', api.customGame);
 
 // J-Archive proxy
 app.get('/media/*', require('./routes/proxy'));

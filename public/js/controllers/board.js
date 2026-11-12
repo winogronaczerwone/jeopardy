@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myApp.controllers').
-  controller('BoardCtrl', function ($scope, $timeout, $modal, socket, currencyFilter) {
+  controller('BoardCtrl', function ($scope, $timeout, $modal, socket) {
     socket.emit('board:init');
 
     socket.on('board:init', function (data) {
@@ -19,21 +19,21 @@ angular.module('myApp.controllers').
             '<div class="player-name">' +
               (($scope.game.player_1 && $scope.game.player_1.name) || 'Player 1') +
             '</div><div class="player-score">' +
-              currencyFilter(($scope.game.player_1 && $scope.game.player_1.score) || 0, '$', 0) +
+              (($scope.game.player_1 && $scope.game.player_1.score) || 0) +
             '</div>' +
           '</div>' +
           '<div class="col-md-4 text-center">' +
             '<div class="player-name">' +
               (($scope.game.player_2 && $scope.game.player_2.name) || 'Player 2') +
             '</div><div class="player-score">' +
-              currencyFilter(($scope.game.player_2 && $scope.game.player_2.score) || 0, '$', 0) +
+              (($scope.game.player_2 && $scope.game.player_2.score) || 0) +
             '</div>' +
           '</div>' +
           '<div class="col-md-4 text-center">' +
             '<div class="player-name">' +
               (($scope.game.player_3 && $scope.game.player_3.name) || 'Player 3') +
             '</div><div class="player-score">' +
-              currencyFilter(($scope.game.player_3 && $scope.game.player_3.score) || 0, '$', 0) +
+              (($scope.game.player_3 && $scope.game.player_3.score) || 0) +
             '</div>' +
           '</div>' +
         '</div>';
